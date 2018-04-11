@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jacky.myapplication.Main3Activity">
+   <com.example.steplinelibrary.StepLine
+       android:id="@+id/step_line"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:padding="10dp"
+       app:circle_radius="20dp"
+       app:text_padding="15dp"
+       app:check_circle_color="#d6d1d1"
+       app:check_stroke_color="#000000"
+       app:uncheck_stroke_color="#d6d1d1"
+       app:uncheck_circle_color="@android:color/white"
+       app:top_item_name_size="10sp"
+       app:top_name="@array/top_names"
+       app:check_top_name_color="#000000"
+       app:uncheck_top_name_color="#8e8b8b"
+       app:bottom_description="@array/bottom_names"
+       app:bottom_item_description_size="15sp"
+       app:check_bottom_item_description_color="#000000"
+       app:uncheck_bottom_item_description_color="#8e8b8b"
+       app:edge_line_width="30dp"
+       app:current_step="0"
+       app:center_line_width="60dp"
+       app:center_line_color="#cecdcd"
+       app:center_line_thick="1dp"/>
+</android.support.constraint.ConstraintLayout>

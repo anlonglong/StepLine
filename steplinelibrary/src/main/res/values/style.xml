@@ -1,0 +1,36 @@
+<resources>
+
+
+    <declare-styleable name="StepLine">
+        <attr name="text_padding"                 format="dimension|reference"/>
+        <attr name="circle_radius"                format="dimension|reference"/>
+        <attr name="edge_line_width"              format="dimension|reference"/>
+        <attr name="center_line_width"            format="dimension|reference"/>
+        <attr name="center_line_color"            format="color|reference"/>
+        <attr name="center_line_thick"            format="dimension|reference"/>
+
+        <attr name="current_step"                           format="integer"/>
+
+        <attr name="check_circle_color"                     format="color"/>
+        <attr name="uncheck_circle_color"                   format="color"/>
+
+        <attr name="check_stroke_color"                     format="color"/>
+        <attr name="uncheck_stroke_color"                   format="color"/>
+
+        <attr name="bottom_item_description_size"           format="dimension|reference"/>
+        <attr name="bottom_description"                     format="reference"/>
+        <attr name="check_bottom_item_description_color"    format="color|reference"/>
+        <attr name="uncheck_bottom_item_description_color"  format="color|reference"/>
+
+
+
+        <attr name="top_name"                               format="reference"/>
+        <attr name="top_item_name_size"                     format="dimension|reference"/>
+        <attr name="check_top_name_color"                   format="color|reference"/>
+        <attr name="uncheck_top_name_color"                 format="color|reference"/>
+
+        <attr name="step_count"                             format="reference|integer"/>
+    </declare-styleable>
+
+
+</resources>

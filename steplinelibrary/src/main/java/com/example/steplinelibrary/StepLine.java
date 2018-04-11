@@ -83,6 +83,9 @@ public class StepLine extends View {
         mCheckTopNameColor = typedArray.getColor(R.styleable.StepLine_check_top_name_color, Color.BLACK);
         mUnCheckTopNameColor = typedArray.getColor(R.styleable.StepLine_uncheck_top_name_color, Color.BLACK);
 
+
+
+        
         //选中和未选中的圆圈的填充颜色
         mCheckCircleColor = typedArray.getColor(R.styleable.StepLine_check_circle_color, Color.GRAY);
         mUnCheckCircleColor = typedArray.getColor(R.styleable.StepLine_uncheck_circle_color, Color.WHITE);

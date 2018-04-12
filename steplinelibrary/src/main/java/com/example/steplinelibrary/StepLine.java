@@ -94,14 +94,20 @@ public class StepLine extends View {
         mUnCheckStrokeColor = typedArray.getColor(R.styleable.StepLine_uncheck_stroke_color, Color.BLACK);
 
         mCurrentStep = typedArray.getInteger(R.styleable.StepLine_current_step, 1);
-        mStepCount = typedArray.getInteger(R.styleable.StepLine_step_count, 2);
+        //默认至少一个步骤
+        mStepCount = typedArray.getInteger(R.styleable.StepLine_step_count, 1);
 
         //mTopName = typedArray.getTextArray(R.styleable.PassWorldLine_top_name);
 
         //mBottomDescription = typedArray.getTextArray(R.styleable.PassWorldLine_bottom_description);
 
-
         typedArray.recycle();
+
+        mStepCount = mBottomDescription.length;
+
+        if (mTopName.length != mBottomDescription.length) {
+            throw new UnsupportedOperationException("the length of topName must be  exactly as same sa mBottomDescription length");
+        }
         initPaint();
 
         mFontMetrics = mPaint.getFontMetrics();
@@ -126,16 +132,16 @@ public class StepLine extends View {
     private int measureWith(int widthMeasureSpec) {
         int result = 0;
         int mode = MeasureSpec.getMode(widthMeasureSpec);
-        int with = MeasureSpec.getSize(widthMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
         switch (mode) {
             case MeasureSpec.EXACTLY:
-                result = with;
-                mCenterLineWidth = with - getPaddingLeft() - getPaddingRight() - 2 * mEdgeLineWidth - 3 * 2 * mCircleRadius;
+                result = width;
+                mCenterLineWidth = width - getPaddingLeft() - getPaddingRight() - 2 * mEdgeLineWidth - mStepCount * 2 * mCircleRadius;
                 break;
             case MeasureSpec.AT_MOST:
             case MeasureSpec.UNSPECIFIED:
-                int realWidth = getPaddingLeft() + getPaddingRight() + 2 * mEdgeLineWidth + 2 * mCircleRadius * 3 + 2 * mCenterLineWidth;
-                result = Math.min(realWidth, with);
+                int realWidth = getPaddingLeft() + getPaddingRight() + 2 * mEdgeLineWidth + 2 * mCircleRadius +(mStepCount-1)*(mCenterLineWidth+2 * mCircleRadius);
+                result = Math.min(realWidth, width);
                 break;
         }
         return result;
@@ -175,7 +181,7 @@ public class StepLine extends View {
         mPaint.setColor(mCenterLineColor);
         float startX = getPaddingLeft();
         float startY = getPaddingTop() + mCircleRadius;
-        float endX = getMeasuredWidth() - getPaddingRight();
+        float endX = getWidth() - getPaddingRight();
         float endY = startY;
         canvas.drawLine(startX, startY, endX, endY, mPaint);
         for (int i = 0; i < mStepCount; i++) {
@@ -202,6 +208,9 @@ public class StepLine extends View {
                 mPaint.setTextSize(mTopItemNameSize);
                 mPaint.setColor(mCheckTopNameColor);
                 canvas.drawText(mTopName[i], cx - topNameItemWidth / 2, cy + rectTopNameHeight / 2 + mFontMetrics.bottom, mPaint);
+                //加这一句的原因是：刚开始文字不会绘制在最中间，而是绘制在中间偏右的地方，而息屏亮屏幕以后
+                //则会绘制在最中间，加了下面这一句后，则不会出现上面的的问题。
+                //可能是首次运行的时候没有及时刷新界面吧，这里强制刷新一下界面。
                 invalidate();
             } else {
                 //画实心圆
@@ -430,5 +439,10 @@ public class StepLine extends View {
      * 绘制文字的时候要注意：
      *    文字有宽度和高度，文字从左下角开始绘制
      *    文字画笔的样式最好是Paint.Style.FILL的
+     *    难点在于绘制文字的时候的起点坐标，
+     *    文字的高度的计算在Paint.FontMetrics这个类里面，
+     *    文字的宽度可以调用 mPaint.measureText(mTopName[i]);
+     *    这个方法计算。
+     *
      */
 }
